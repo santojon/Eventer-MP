@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Eventer-js-1.0">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <root id="archive" name="Eventer-js-1.0.jar">
+      <element id="module-output" name="Eventer.jsMain" />
+    </root>
+  </artifact>
+</component>
