@@ -36,3 +36,4 @@ build/
 /projectFilesBackup*
 /reports
 /private_tools
+local.properties
