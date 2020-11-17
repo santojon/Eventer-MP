@@ -5,7 +5,7 @@ plugins {
     `maven-publish`
 }
 
-group = "com.santojon.eventer"
+group = "com.santojon"
 version = "0.1.0"
 
 val local = Properties()

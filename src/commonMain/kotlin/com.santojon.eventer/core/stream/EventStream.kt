@@ -5,11 +5,11 @@ import com.santojon.eventer.core.event.ListEvent
 import com.santojon.eventer.extension.subscribe
 import kotlin.reflect.KClass
 
-open class EventStream<T : Any>(open val observable: Source<T>?) {
+class EventStream<T : Any>(val observable: Source<T>?) {
     /**
      * Subscribe to get stream
      */
-    open fun subscribe(
+    fun subscribe(
         onNext: (T?) -> Unit,
         onError: (Throwable?) -> Unit,
         onComplete: () -> Unit
@@ -17,32 +17,32 @@ open class EventStream<T : Any>(open val observable: Source<T>?) {
         observable?.subscribe(onNext, onError, onComplete)
     }
 
-    open fun subscribe(onNext: (T?) -> Unit, onError: (Throwable?) -> Unit) {
+    fun subscribe(onNext: (T?) -> Unit, onError: (Throwable?) -> Unit) {
         subscribe(onNext, onError, {})
     }
 
-    open fun subscribe(onNext: (T?) -> Unit, onComplete: () -> Unit) {
+    fun subscribe(onNext: (T?) -> Unit, onComplete: () -> Unit) {
         subscribe(onNext, {}, onComplete)
     }
 
-    open fun subscribe(onNext: (T?) -> Unit) {
+    fun subscribe(onNext: (T?) -> Unit) {
         subscribe(onNext, {}, {})
     }
 
-    open fun onReceive(
+    fun onReceive(
         onNext: (T?) -> Unit,
         onError: (Throwable?) -> Unit,
         onComplete: () -> Unit
     ) =
         subscribe(onNext, onError, onComplete)
 
-    open fun onReceive(onNext: (T?) -> Unit, onError: (Throwable?) -> Unit) =
+    fun onReceive(onNext: (T?) -> Unit, onError: (Throwable?) -> Unit) =
         subscribe(onNext, onError, {})
 
-    open fun onReceive(onNext: (T?) -> Unit, onComplete: () -> Unit) =
+    fun onReceive(onNext: (T?) -> Unit, onComplete: () -> Unit) =
         subscribe(onNext, {}, onComplete)
 
-    open fun onReceive(onNext: (T?) -> Unit) = subscribe(onNext)
+    fun onReceive(onNext: (T?) -> Unit) = subscribe(onNext)
 
     /**
      * Filter and Map Events by Class
@@ -119,7 +119,7 @@ open class EventStream<T : Any>(open val observable: Source<T>?) {
     /**
      * Filter Events by vararg Classes
      */
-    open fun isAnyOf(vararg args: KClass<out T>): EventStream<T>? {
+    fun isAnyOf(vararg args: KClass<out T>): EventStream<T>? {
         return EventStream(
             filter { event ->
                 args.map { arg ->
@@ -133,7 +133,7 @@ open class EventStream<T : Any>(open val observable: Source<T>?) {
      * Filter emits only events from an
      * EventStream that satisfies a predicate function.
      */
-    open fun filter(predicate: (T?) -> Boolean): EventStream<T>? {
+    fun filter(predicate: (T?) -> Boolean): EventStream<T>? {
         return EventStream(observable?.filter(predicate))
     }
 
@@ -141,7 +141,7 @@ open class EventStream<T : Any>(open val observable: Source<T>?) {
      * Map transforms an EventStream by creating
      * a new EventStream through a projection function.
      */
-    open fun <R : Any> map(transform: (T?) -> R): EventStream<R>? {
+    fun <R : Any> map(transform: (T?) -> R): EventStream<R>? {
         return EventStream(observable?.map(transform))
     }
 }
