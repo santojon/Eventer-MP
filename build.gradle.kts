@@ -1,12 +1,23 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     kotlin("multiplatform") version "1.4.10"
+    `maven-publish`
 }
+
 group = "com.santojon.eventer"
-version = "1.0"
+version = "0.1.0"
+
+val local = Properties()
+val localProperties: File = rootProject.file("local.properties")
+if (localProperties.exists()) {
+    localProperties.inputStream().use { local.load(it) }
+}
 
 repositories {
     mavenCentral()
 }
+
 kotlin {
     jvm {
         compilations.all {
@@ -58,5 +69,23 @@ kotlin {
         }
         val nativeMain by getting
         val nativeTest by getting
+    }
+}
+
+publishing {
+    publications {
+        val kotlinMultiplatform by getting {
+            repositories {
+                maven {
+                    credentials {
+                        username = local.getProperty("bintray.user")
+                        password = local.getProperty("bintray.apikey")
+                    }
+                    url = uri(
+                        "https://api.bintray.com/maven/santojon/Eventer/Eventer-MP"
+                    )
+                }
+            }
+        }
     }
 }
