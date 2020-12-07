@@ -7,6 +7,7 @@ import com.santojon.eventer.event.ExtendedListEvent
 import com.santojon.eventer.event.IntEvent
 import com.santojon.eventer.event.StringEvent
 import com.santojon.eventer.event.extendedListEventOf
+import com.santojon.eventer.simulator.EventStreamSimulator
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test

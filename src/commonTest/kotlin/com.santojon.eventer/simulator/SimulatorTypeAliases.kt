@@ -1,4 +1,4 @@
-package com.santojon.eventer.test
+package com.santojon.eventer.simulator
 
 import com.santojon.eventer.core.stream.EventStream
 

@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.konan.properties.Properties
 
 plugins {
-    kotlin("multiplatform") version "1.4.10"
+    kotlin("multiplatform") version "1.4.20"
     `maven-publish`
 }
 
 group = "com.santojon"
-version = "0.1.0"
+version = "3.0.0"
 
 val local = Properties()
 val localProperties: File = rootProject.file("local.properties")
@@ -16,6 +16,7 @@ if (localProperties.exists()) {
 
 repositories {
     mavenCentral()
+    maven("https://dl.bintray.com/badoo/maven")
 }
 
 kotlin {
@@ -46,7 +47,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.noheltcj:rxcommon:0.6.1")
+                implementation("com.badoo.reaktive:reaktive:1.1.18")
             }
         }
         val commonTest by getting {
