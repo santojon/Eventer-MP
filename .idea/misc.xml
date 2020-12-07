@@ -4,4 +4,12 @@
   <component name="ProjectRootManager" version="2" languageLevel="JDK_14_PREVIEW" default="false" project-jdk-name="14" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
+  <component name="SuppressABINotification">
+    <option name="modulesWithSuppressedNotConfigured">
+      <set>
+        <option value="com.santojon.eventer.commonMain" />
+        <option value="eventer" />
+      </set>
+    </option>
+  </component>
 </project>
