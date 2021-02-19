@@ -49,6 +49,7 @@ class OtherOperatorsTest {
             IntEvent(10),
             StringEvent("5"),
             StringEvent("12"),
+            IntEvent(12),
             IntEvent(12)
         )
 
@@ -146,13 +147,13 @@ class OtherOperatorsTest {
      * Filter the stream for an event quantity window
      */
     private fun windowFunction(stream: EventStream<Event>?): EventStream<Event>? =
-        stream?.window(3, 0)
+        stream?.window(3, 4)
 
     /**
      * Filter the stream for an event sequence
      */
     private fun sequenceFunction(stream: EventStream<Event>?): EventStream<List<Event>>? =
-        stream?.sequence(2, 0) { a, b ->
+        stream?.sequence(2) { a, b ->
             (a as? IntEvent?)?.value ?: 0 > (b as? IntEvent?)?.value ?: 0
         }
 

@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.konan.properties.Properties
 
 plugins {
-    kotlin("multiplatform") version "1.4.20"
+    kotlin("multiplatform") version "1.4.30"
     `maven-publish`
 }
 
@@ -10,9 +10,7 @@ version = "3.0.0"
 
 val local = Properties()
 val localProperties: File = rootProject.file("local.properties")
-if (localProperties.exists()) {
-    localProperties.inputStream().use { local.load(it) }
-}
+if (localProperties.exists()) localProperties.inputStream().use { local.load(it) }
 
 repositories {
     mavenCentral()
@@ -47,7 +45,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.badoo.reaktive:reaktive:1.1.18")
+                implementation("com.badoo.reaktive:reaktive:1.1.20")
             }
         }
         val commonTest by getting {

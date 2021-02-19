@@ -197,7 +197,7 @@ open class EventStream<T : Any>(open val observable: Observable<T>?) {
      */
     open fun sequence(
         count: Int,
-        skip: Int = 0,
+        skip: Int = count,
         predicate: (T?, T?) -> Boolean
     ): EventStream<List<T>>? {
         val sequenceEquals = observable
@@ -235,22 +235,14 @@ open class EventStream<T : Any>(open val observable: Observable<T>?) {
     /**
      * Window only emits events that happened within a given time frame.
      */
-    open fun window(count: Int, skip: Int): EventStream<T>? {
+    open fun window(count: Int, skip: Int = count): EventStream<T>? {
         return EventStream(
             observable?.buffer(
                 count, skip
             )?.flatMap { list ->
                 observable { emitter ->
-                    var skipCounter = 0
-                    list.forEach { item ->
-                        if (skipCounter > 0) {
-                            skipCounter -= 1
-                        } else {
-                            emitter.onNext(item)
-                            if (skip > 0) {
-                                skipCounter = skip
-                            }
-                        }
+                    list.map { item ->
+                        emitter.onNext(item)
                     }
                 }
             })
