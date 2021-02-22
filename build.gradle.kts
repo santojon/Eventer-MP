@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.santojon"
-version = "3.0.0"
+version = "3.0.0-alpha-1"
 
 val local = Properties()
 val localProperties: File = rootProject.file("local.properties")
